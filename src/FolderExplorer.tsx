@@ -34,13 +34,6 @@ const FolderExplorer: React.FC<FolderExplorerProps> = ({
     return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i]
   }
 
-  const getRelativeDisplayPath = (relativePath: string) => {
-    const parts = relativePath.split(/[/\\]/)
-    if (parts.length > 1) {
-      return parts.slice(0, -1).join('/') + '/'
-    }
-    return ''
-  }
 
   return (
     <div className="folder-explorer">
@@ -67,7 +60,6 @@ const FolderExplorer: React.FC<FolderExplorerProps> = ({
           <h5>Files:</h5>
           {folderFiles.map((file, index) => {
             const isActive = currentFilePath === file.path
-            const displayPath = getRelativeDisplayPath(file.relativePath)
             
             return (
               <div
@@ -76,21 +68,13 @@ const FolderExplorer: React.FC<FolderExplorerProps> = ({
                 onClick={() => onFileSelect(file)}
                 title={file.title || file.relativePath}
               >
-                <div className="file-item-main">
-                  <span className="file-icon">📝</span>
-                  <div className="file-info">
-                    {file.title && (
-                      <div className="file-title">{file.title}</div>
-                    )}
-                    <div className="file-name">{file.name}</div>
-                  </div>
+                <div className="file-info">
+                  {file.title && (
+                    <div className="file-title">{file.title}</div>
+                  )}
+                  <div className="file-name">{file.name}</div>
                 </div>
-                {displayPath && (
-                  <div className="file-path">{displayPath}</div>
-                )}
-                <div className="file-meta">
-                  <span className="file-size">{formatFileSize(file.size)}</span>
-                </div>
+                <span className="file-size">{formatFileSize(file.size)}</span>
               </div>
             )
           })}
