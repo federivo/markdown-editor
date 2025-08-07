@@ -1,4 +1,6 @@
-import React, { useState, useRef, useCallback, useEffect } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
+import { Button } from '@/components/ui/button'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 interface ResizableLayoutProps {
   sidebar: React.ReactNode
@@ -21,100 +23,120 @@ const ResizableLayout: React.FC<ResizableLayoutProps> = ({
 }) => {
   const [sidebarWidth, setSidebarWidth] = useState(initialSidebarWidth)
   const [isResizing, setIsResizing] = useState(false)
-  const containerRef = useRef<HTMLDivElement>(null)
-  const resizerRef = useRef<HTMLDivElement>(null)
+  const startXRef = useRef<number>(0)
+  const startWidthRef = useRef<number>(0)
 
-  const startResizing = useCallback((e: React.MouseEvent) => {
+  const handleMouseDown = (e: React.MouseEvent) => {
     if (isCollapsed) return
+    
     e.preventDefault()
+    e.stopPropagation()
+    
+    startXRef.current = e.clientX
+    startWidthRef.current = sidebarWidth
     setIsResizing(true)
-  }, [isCollapsed])
-
-  const stopResizing = useCallback(() => {
-    setIsResizing(false)
-  }, [])
-
-  const resize = useCallback(
-    (e: MouseEvent) => {
-      if (isResizing && containerRef.current) {
-        const containerRect = containerRef.current.getBoundingClientRect()
-        const newWidth = e.clientX - containerRect.left
-        
-        const clampedWidth = Math.min(
-          Math.max(newWidth, minSidebarWidth),
-          maxSidebarWidth
-        )
-        
-        setSidebarWidth(clampedWidth)
-      }
-    },
-    [isResizing, minSidebarWidth, maxSidebarWidth]
-  )
+  }
 
   useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!isResizing) return
+      
+      const deltaX = e.clientX - startXRef.current
+      const newWidth = startWidthRef.current + deltaX
+      
+      const clampedWidth = Math.min(
+        Math.max(newWidth, minSidebarWidth),
+        maxSidebarWidth
+      )
+      
+      setSidebarWidth(clampedWidth)
+    }
+
+    const handleMouseUp = () => {
+      if (isResizing) {
+        setIsResizing(false)
+      }
+    }
+
     if (isResizing) {
-      document.addEventListener('mousemove', resize)
-      document.addEventListener('mouseup', stopResizing)
+      document.addEventListener('mousemove', handleMouseMove)
+      document.addEventListener('mouseup', handleMouseUp)
       document.body.style.cursor = 'ew-resize'
       document.body.style.userSelect = 'none'
-    } else {
-      document.removeEventListener('mousemove', resize)
-      document.removeEventListener('mouseup', stopResizing)
-      document.body.style.cursor = ''
-      document.body.style.userSelect = ''
     }
 
     return () => {
-      document.removeEventListener('mousemove', resize)
-      document.removeEventListener('mouseup', stopResizing)
-      document.body.style.cursor = ''
-      document.body.style.userSelect = ''
+      document.removeEventListener('mousemove', handleMouseMove)
+      document.removeEventListener('mouseup', handleMouseUp)
+      if (isResizing) {
+        document.body.style.cursor = ''
+        document.body.style.userSelect = ''
+      }
     }
-  }, [isResizing, resize, stopResizing])
+  }, [isResizing, minSidebarWidth, maxSidebarWidth, sidebarWidth])
 
-  const collapsedWidth = 40
+  const collapsedWidth = 48
   const actualSidebarWidth = isCollapsed ? collapsedWidth : sidebarWidth
 
   return (
-    <div ref={containerRef} className="resizable-layout">
+    <div className="flex h-screen w-screen">
       <div 
-        className={`resizable-sidebar ${isCollapsed ? 'collapsed' : ''}`}
+        className={`flex flex-col bg-card border-r border-border flex-shrink-0 h-full ${
+          isCollapsed ? 'items-center' : ''
+        }`}
         style={{ width: actualSidebarWidth }}
       >
         {isCollapsed ? (
-          <div className="collapsed-sidebar">
-            <button 
-              className="collapse-toggle"
+          <div className="flex flex-col items-center p-2 h-full">
+            <Button 
+              variant="ghost"
+              size="sm"
               onClick={onToggleCollapse}
               title="Expand sidebar"
+              className="mb-2"
             >
-              →
-            </button>
+              <ChevronRight className="h-4 w-4" />
+            </Button>
           </div>
         ) : (
           <>
-            <div className="sidebar-header">
-              <button 
-                className="collapse-toggle"
+            <div className="flex justify-end p-2 border-b border-border">
+              <Button 
+                variant="ghost"
+                size="sm"
                 onClick={onToggleCollapse}
                 title="Collapse sidebar"
               >
-                ←
-              </button>
+                <ChevronLeft className="h-4 w-4" />
+              </Button>
             </div>
             {sidebar}
           </>
         )}
       </div>
+      {!isCollapsed && (
+        <div 
+          className={`w-1 bg-border hover:bg-primary cursor-ew-resize transition-colors duration-200 flex-shrink-0 relative group ${
+            isResizing ? 'bg-primary' : ''
+          }`}
+          onMouseDown={handleMouseDown}
+          style={{ 
+            zIndex: 50,
+            minWidth: '4px', // Ensure minimum width for dragging
+          }}
+        >
+          {/* Invisible hit area for easier grabbing */}
+          <div 
+            className="absolute inset-y-0 -left-2 -right-2 cursor-ew-resize"
+            onMouseDown={handleMouseDown}
+            style={{ zIndex: 51 }}
+          />
+          {/* Visual indicator when hovering */}
+          <div className="absolute inset-y-0 left-1/2 w-0.5 bg-primary/80 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+        </div>
+      )}
       <div 
-        ref={resizerRef}
-        className={`resizer ${isResizing ? 'resizing' : ''} ${isCollapsed ? 'collapsed' : ''}`}
-        onMouseDown={startResizing}
-        style={{ display: isCollapsed ? 'none' : 'block' }}
-      />
-      <div 
-        className="resizable-content"
-        style={{ width: `calc(100% - ${actualSidebarWidth + (isCollapsed ? 0 : 4)}px)` }}
+        className="flex-1 min-w-0 overflow-hidden"
       >
         {children}
       </div>

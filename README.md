@@ -1,6 +1,6 @@
 # Markdown Reader
 
-A modern, cross-platform Markdown editor with real-time preview, file management, and export capabilities.
+A modern, cross-platform Markdown editor with real-time preview, advanced file management, and comprehensive export capabilities. Built with Electron, React, and shadcn/ui for a professional writing experience.
 
 ## Download
 
@@ -24,14 +24,32 @@ A modern, cross-platform Markdown editor with real-time preview, file management
 
 ## Features
 
+### ✨ Core Features
 - **Real-time Markdown Preview**: See your changes instantly with GitHub-flavored Markdown support
-- **Monaco Editor Integration**: Professional code editing experience with syntax highlighting
+- **Monaco Editor Integration**: Professional code editing with syntax highlighting and IntelliSense
 - **Multiple View Modes**: Switch between editor-only, preview-only, or split-view layouts
-- **File Management**: Browse and organize Markdown files with an integrated folder explorer
-- **Export Options**: Export documents to HTML and PDF formats
-- **Keyboard Shortcuts**: Quick access to common actions (Cmd/Ctrl+O, S, N, F)
-- **Syntax Highlighting**: Code blocks with proper syntax highlighting
-- **Responsive Design**: Resizable panes for optimal workflow
+- **Advanced File Management**: Integrated folder explorer with file metadata and nested folder support
+- **Export Options**: Export to HTML and PDF with high-fidelity rendering
+
+### 🎨 User Interface
+- **Modern Design**: Clean, professional interface built with shadcn/ui components
+- **Dark Mode Support**: Complete light/dark theme switching with system preference detection
+- **Resizable Layouts**: Drag-to-resize split view and sidebar for optimal workspace organization
+- **Custom App Logo**: Distinctive branding with theme-aware logo design
+- **Responsive Design**: Adapts beautifully to different window sizes
+
+### 🔍 Enhanced Functionality  
+- **Powerful Search**: Real-time search with highlighting in both editor and preview
+- **Font Size Control**: Adjustable preview font size (10px-32px) with dedicated controls
+- **Smart Dropdown Menus**: Unified file/folder opening with improved UX
+- **Comprehensive Keyboard Shortcuts**: Full keyboard navigation and control
+- **File Metadata Display**: View file size, modification dates, and document titles
+
+### 🎯 Writing Experience
+- **Distraction-free Writing**: Clean, focused editor environment with proper content spacing
+- **Enhanced Markdown Styling**: Improved typography, code blocks, tables, and blockquotes
+- **Document-style Preview**: Paper-like preview container for natural reading experience
+- **Smooth Scrolling**: Generous bottom padding for comfortable document navigation
 
 ## Development
 
@@ -72,29 +90,49 @@ npm run dist
 
 ## Usage
 
-### Basic Operations
+### 📂 File Operations
 
-1. **Open File**: Use Cmd/Ctrl+O or click the Open button to select a Markdown file
-2. **Save File**: Use Cmd/Ctrl+S to save your current document
-3. **New File**: Use Cmd/Ctrl+N to create a new document
-4. **Open Folder**: Use Cmd/Ctrl+F to browse a folder containing Markdown files
+| Action | Keyboard Shortcut | Description |
+|--------|------------------|-------------|
+| **Open File** | `Cmd/Ctrl + O` | Open a single Markdown file |
+| **Open Folder** | Use dropdown menu | Browse and select a folder containing Markdown files |
+| **Save File** | `Cmd/Ctrl + S` | Save current document |
+| **New File** | `Cmd/Ctrl + N` | Create a new untitled document |
 
-### View Modes
+### 🔍 Search & Navigation
 
-- **Editor Only**: Focus on writing with the full editor view
-- **Preview Only**: Review your rendered Markdown
-- **Split View**: Edit and preview simultaneously
+| Action | Keyboard Shortcut | Description |
+|--------|------------------|-------------|
+| **Search Document** | `Cmd/Ctrl + F` | Search with real-time highlighting in editor and preview |
+| **Font Size Up** | `Cmd/Ctrl + =` | Increase preview font size |
+| **Font Size Down** | `Cmd/Ctrl + -` | Decrease preview font size |
+| **Reset Font Size** | `Cmd/Ctrl + 0` | Reset preview font size to default (16px) |
 
-### Folder Explorer
+### 📖 View Modes
 
-- Browse Markdown files in the selected folder
-- View file metadata (size, relative paths)
-- Support for nested folder structures (up to 3 levels deep)
+- **Editor Only**: Full-width writing environment with syntax highlighting
+- **Preview Only**: Clean reading view with document-style formatting
+- **Split View**: Edit and preview simultaneously with resizable divider
 
-### Export Features
+### 🎨 Interface Features
 
-- **HTML Export**: Generate standalone HTML files
-- **PDF Export**: Create PDF documents from your Markdown content
+- **Theme Toggle**: Switch between light and dark modes
+- **Resizable Panels**: Drag dividers to adjust sidebar and split view proportions
+- **Font Size Controls**: Dedicated +/- buttons in preview header (10px-32px range)
+- **Dropdown Navigation**: Unified file and folder opening interface
+
+### 📁 Folder Explorer
+
+- **File Browser**: Navigate Markdown files with sidebar explorer
+- **Metadata Display**: View file size, modification dates, and extracted titles
+- **Nested Support**: Browse folders up to 3 levels deep
+- **Quick Access**: Click any file to open instantly
+
+### 📤 Export Options
+
+- **HTML Export**: Generate standalone HTML files with embedded styling
+- **PDF Export**: Create high-quality PDF documents from your Markdown content
+- **One-click Export**: Dedicated export buttons with progress indicators
 
 ## File Structure
 
