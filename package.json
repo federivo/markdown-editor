@@ -1,6 +1,6 @@
 {
   "name": "markdown-app",
-  "version": "2.0.0",
+  "version": "2.0.3",
   "description": "A modern, cross-platform Markdown editor with real-time preview, file management, and export capabilities.",
   "main": "electron.cjs",
   "scripts": {
