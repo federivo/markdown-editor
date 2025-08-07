@@ -36,6 +36,7 @@ interface FolderFile {
 
 const MarkdownApp: React.FC = () => {
   const [currentFile, setCurrentFile] = useState<FileInfo | null>(null)
+  
   const [content, setContent] = useState('')
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false)
   const [viewMode, setViewMode] = useState<'split' | 'editor' | 'preview'>('preview')
@@ -79,7 +80,30 @@ const MarkdownApp: React.FC = () => {
     try {
       setIsSaving(true)
       const result = await (window as any).electronAPI?.saveFile(currentFile.path, content)
+      
       if (result?.success) {
+        // Update currentFile with the saved path (important for new files)
+        if (result.path && result.path !== currentFile.path) {
+          setCurrentFile({
+            ...currentFile,
+            path: result.path,
+            name: result.path.split('/').pop() || currentFile.name
+          })
+        }
+        
+        // Always refresh folder contents if we have a current folder and the saved file is within it
+        // This handles both new files and existing files (to update modification times, etc.)
+        if (currentFolder && result.path && result.path.startsWith(currentFolder)) {
+          try {
+            const folderContents = await (window as any).electronAPI?.readFolderContents(currentFolder)
+            if (folderContents?.files) {
+              setFolderFiles(folderContents.files)
+            }
+          } catch (refreshError) {
+            console.warn('Failed to refresh folder contents after save:', refreshError)
+          }
+        }
+        
         setHasUnsavedChanges(false)
         showToast('File saved successfully', 'success')
       } else {
@@ -328,6 +352,25 @@ const MarkdownApp: React.FC = () => {
     }
   }, [searchTerm, viewMode, renderedHtml])
 
+  // Scroll to top when opening a new file
+  useEffect(() => {
+    if (currentFile) {
+      // Small delay to ensure content is rendered
+      setTimeout(() => {
+        // Scroll editor to top
+        if (editorRef.current) {
+          editorRef.current.setScrollPosition({ scrollTop: 0, scrollLeft: 0 })
+        }
+        
+        // Scroll preview to top
+        const previewElements = document.querySelectorAll('.overflow-y-auto')
+        previewElements.forEach(element => {
+          element.scrollTop = 0
+        })
+      }, 50)
+    }
+  }, [currentFile?.path])
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key === 'o') {
@@ -360,8 +403,26 @@ const MarkdownApp: React.FC = () => {
       }
     }
 
+    // Set up Electron menu event listeners
+    // const electronAPI = (window as any).electronAPI
+    // if (electronAPI) {
+    //   electronAPI.onNewFile?.(handleNewFile)
+    //   electronAPI.onOpenFile?.(handleOpenFile)
+    //   electronAPI.onSaveFile?.(handleSaveFile)
+    //   electronAPI.onSaveFileAs?.(handleSaveFile)
+    // }
+
     window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+      // Clean up Electron listeners
+      // if (electronAPI) {
+      //   electronAPI.removeAllListeners?.('new-file')
+      //   electronAPI.removeAllListeners?.('open-file')
+      //   electronAPI.removeAllListeners?.('save-file')
+      //   electronAPI.removeAllListeners?.('save-file-as')
+      // }
+    }
   }, [currentFile, content])
 
   const renderPreview = () => {
@@ -444,7 +505,7 @@ const MarkdownApp: React.FC = () => {
     <div className="flex flex-col h-full p-4 bg-card">
       <div className="flex items-center gap-3 mb-4">
         <AppLogo size={28} className="flex-shrink-0" />
-        <h3 className="font-semibold text-card-foreground">Markdown Reader</h3>
+        <h3 className="font-semibold text-card-foreground">Markdown Editor</h3>
       </div>
       
       <FolderExplorer
@@ -462,7 +523,16 @@ const MarkdownApp: React.FC = () => {
         <div className="bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 border-b border-border px-4 py-3 flex items-center gap-3 flex-wrap min-h-[60px]">
           {/* Left section - File operations */}
           <div className="flex items-center gap-2">
-            <Button onClick={handleNewFile} size="sm" className="gap-2">
+            <Button 
+              type="button"
+              onClick={(e) => {
+                e.preventDefault()
+                e.stopPropagation()
+                handleNewFile()
+              }} 
+              size="sm" 
+              className="gap-2"
+            >
               <FileText className="h-4 w-4" />
               <span className="hidden sm:inline">New</span>
             </Button>
@@ -486,8 +556,13 @@ const MarkdownApp: React.FC = () => {
               </DropdownMenuContent>
             </DropdownMenu>
             <Button 
+              type="button"
               variant="outline" 
-              onClick={handleSaveFile}
+              onClick={(e) => {
+                e.preventDefault()
+                e.stopPropagation()
+                handleSaveFile()
+              }}
               disabled={!currentFile || (!hasUnsavedChanges && !isSaving) || isSaving}
               size="sm"
               className="gap-2 relative"
@@ -615,7 +690,7 @@ const MarkdownApp: React.FC = () => {
                 <CardHeader className="text-center">
                   <CardTitle className="flex items-center justify-center gap-3">
                     <AppLogo size={32} />
-                    Welcome to Markdown Reader
+                    Welcome to Markdown Editor
                   </CardTitle>
                   <CardDescription>
                     Create a new file or open an existing markdown file to get started.

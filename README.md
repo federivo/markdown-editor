@@ -1,4 +1,4 @@
-# Markdown Reader
+# Markdown Editor
 
 A modern, cross-platform Markdown editor with real-time preview, advanced file management, and comprehensive export capabilities. Built with Electron, React, and shadcn/ui for a professional writing experience.
 
