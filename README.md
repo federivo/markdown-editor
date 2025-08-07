@@ -1,6 +1,18 @@
-# Markdown Editor
+# Markdown Reader
 
-A modern, cross-platform Markdown editor built with Electron, React, and TypeScript. Features real-time preview, file management, and export capabilities.
+A modern, cross-platform Markdown editor with real-time preview, file management, and export capabilities.
+
+## Download
+
+**Ready to use? Download the latest release for your platform:**
+
+[![Download Latest Release](https://img.shields.io/github/v/release/federivo/markdown-editor?style=for-the-badge&logo=github)](https://github.com/federivo/markdown-editor/releases/latest)
+
+- **Windows**: Download the `.exe` installer or `.zip` portable version
+- **macOS**: Download the `.dmg` installer or `.zip` portable version  
+- **Linux**: Download the `.AppImage` (universal) or `.deb` package
+
+> No installation required for portable versions and AppImage files!
 
 ## Features
 
@@ -13,17 +25,21 @@ A modern, cross-platform Markdown editor built with Electron, React, and TypeScr
 - **Syntax Highlighting**: Code blocks with proper syntax highlighting
 - **Responsive Design**: Resizable panes for optimal workflow
 
-## Requirements
+## Development
+
+Want to contribute or run from source? See the development setup below.
+
+### Requirements
 
 - Node.js 16.0 or higher
 - npm or yarn package manager
 
-## Installation
+### Installation
 
 1. Clone the repository:
 ```bash
-git clone <repository-url>
-cd markdown-app
+git clone https://github.com/federivo/markdown-editor.git
+cd markdown-editor
 ```
 
 2. Install dependencies:
@@ -31,47 +47,20 @@ cd markdown-app
 npm install
 ```
 
-## Development
-
-Start the development server with hot reload:
-
+3. Start development server:
 ```bash
 npm run electron-dev
 ```
 
-This command will:
-- Start the Vite development server on `http://localhost:3000`
-- Launch Electron in development mode
-- Enable hot reload for both the React frontend and Electron main process
+### Building
 
-For frontend-only development:
 ```bash
-npm run dev
-```
-
-## Building
-
-### Build for Development
-```bash
+# Build for development
 npm run build
-```
 
-### Run Production Electron App
-```bash
-npm run electron
-```
-
-### Package the Application
-```bash
-npm run electron-pack
-```
-
-### Create Distribution Files
-```bash
+# Create distribution files
 npm run dist
 ```
-
-The built application will be available in the `build/` directory.
 
 ## Usage
 
@@ -120,24 +109,10 @@ markdown-app/
 └── dist/                 # Built frontend assets
 ```
 
-## Architecture
+## Contributing
 
-The application follows Electron's security best practices:
-
-- **Main Process** (`electron.cjs`): Handles file system operations, window management, and native integrations
-- **Renderer Process** (`src/`): React-based UI with Monaco Editor and Markdown rendering
-- **Preload Script** (`preload.cjs`): Secure bridge for IPC communication
-
-## Technologies Used
-
-- **Electron**: Cross-platform desktop application framework
-- **React**: User interface library
-- **TypeScript**: Type-safe JavaScript development
-- **Monaco Editor**: VS Code's editor for Markdown editing
-- **Vite**: Fast build tool and development server
-- **react-markdown**: Markdown rendering with GitHub-flavored support
-- **html-pdf-node**: PDF generation capabilities
+Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
 
 ## License
 
-ISC License
+MIT License
