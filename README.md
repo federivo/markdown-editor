@@ -8,11 +8,19 @@ A modern, cross-platform Markdown editor with real-time preview, file management
 
 [![Download Latest Release](https://img.shields.io/github/v/release/federivo/markdown-editor?style=for-the-badge&logo=github)](https://github.com/federivo/markdown-editor/releases/latest)
 
-- **Windows**: Download the `.exe` installer or `.zip` portable version
-- **macOS**: Download the `.dmg` installer or `.zip` portable version  
-- **Linux**: Download the `.AppImage` (universal) or `.deb` package
+### 📥 Quick Download Guide
 
-> No installation required for portable versions and AppImage files!
+| Platform | File to Download | Size | Installation |
+|----------|------------------|------|--------------|
+| **🍎 macOS** | `Markdown-Reader-X.X.X.dmg` | ~150MB | Double-click to install |
+| **🖥️ Windows** | `Markdown Reader Setup X.X.X.exe` | ~120MB | Run installer |
+| **🐧 Linux** | `Markdown-Reader-X.X.X.AppImage` | ~130MB | Make executable & run |
+
+### ⚡ Installation Steps
+
+**macOS**: Download `.dmg` → Open → Drag to Applications  
+**Windows**: Download `.exe` → Run → Follow installer  
+**Linux**: Download `.AppImage` → `chmod +x filename` → `./filename`
 
 ## Features
 

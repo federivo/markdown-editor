@@ -57,16 +57,16 @@
       "preload.cjs",
       "package.json"
     ],
+    "generateUpdatesFilesForAllChannels": false,
+    "releaseInfo": {
+      "releaseNotes": false
+    },
     "mac": {
       "category": "public.app-category.developer-tools",
       "target": [
         {
           "target": "dmg",
-          "arch": ["x64", "arm64"]
-        },
-        {
-          "target": "zip",
-          "arch": ["x64", "arm64"]
+          "arch": ["universal"]
         }
       ],
       "icon": "assets/app-icon.icns",
@@ -77,11 +77,7 @@
       "target": [
         {
           "target": "nsis",
-          "arch": ["x64", "ia32"]
-        },
-        {
-          "target": "zip",
-          "arch": ["x64", "ia32"]
+          "arch": ["x64"]
         }
       ],
       "icon": "assets/app-icon.png"
@@ -91,20 +87,16 @@
         {
           "target": "AppImage",
           "arch": ["x64"]
-        },
-        {
-          "target": "tar.gz",
-          "arch": ["x64"]
-        },
-        {
-          "target": "deb",
-          "arch": ["x64"]
         }
       ],
       "icon": "assets/app-icon.png",
       "category": "Development",
       "maintainer": "Federico Rivollier <federivo@gmail.com>",
       "vendor": "Federico Rivollier"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
     },
     "publish": {
       "provider": "github",
