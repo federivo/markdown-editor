@@ -104,7 +104,7 @@
     "publish": {
       "provider": "github",
       "owner": "federivo",
-      "repo": "markdown-app"
+      "repo": "markdown-editor"
     }
   }
 }
