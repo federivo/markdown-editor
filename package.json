@@ -1,7 +1,7 @@
 {
   "name": "markdown-app",
   "version": "1.0.0",
-  "description": "",
+  "description": "A modern, cross-platform Markdown editor with real-time preview, file management, and export capabilities.",
   "main": "electron.cjs",
   "scripts": {
     "dev": "vite",
@@ -16,9 +16,12 @@
     "dist:all": "npm run build && electron-builder --mac --win --linux",
     "release": "npm run build && electron-builder --publish=always"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["markdown", "editor", "electron", "preview", "writing"],
+  "author": {
+    "name": "Federico Rivollier",
+    "email": "federivo@gmail.com"
+  },
+  "license": "MIT",
   "type": "module",
   "devDependencies": {
     "@types/node": "^24.0.14",
@@ -43,7 +46,7 @@
     "remark-gfm": "^4.0.1"
   },
   "build": {
-    "appId": "com.example.markdown-reader",
+    "appId": "com.federivo.markdown-reader",
     "productName": "Markdown Reader",
     "directories": {
       "output": "build"
@@ -99,7 +102,15 @@
         }
       ],
       "icon": "assets/app-icon.png",
-      "category": "Development"
+      "category": "Development",
+      "synopsis": "Modern Markdown editor with real-time preview",
+      "maintainer": "Federico Rivollier <federivo@gmail.com>",
+      "vendor": "Federico Rivollier",
+      "desktop": {
+        "Name": "Markdown Reader",
+        "Comment": "Edit and preview Markdown files",
+        "Keywords": "markdown;editor;preview;writing;"
+      }
     },
     "publish": {
       "provider": "github",
