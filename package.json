@@ -103,12 +103,11 @@
       ],
       "icon": "assets/app-icon.png",
       "category": "Development",
-      "synopsis": "Modern Markdown editor with real-time preview",
       "maintainer": "Federico Rivollier <federivo@gmail.com>",
       "vendor": "Federico Rivollier",
       "desktop": {
         "Name": "Markdown Reader",
-        "Comment": "Edit and preview Markdown files",
+        "Comment": "Modern Markdown editor with real-time preview",
         "Keywords": "markdown;editor;preview;writing;"
       }
     },
