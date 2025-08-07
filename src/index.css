@@ -153,33 +153,41 @@ body {
 }
 
 .toolbar {
-  height: 50px;
+  min-height: 50px;
   background-color: #fff;
   border-bottom: 1px solid #e2e8f0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 20px;
+  padding: 8px 20px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 .toolbar-left {
   display: flex;
-  gap: 10px;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
 .toolbar-right {
   display: flex;
-  gap: 10px;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
 .btn {
-  padding: 8px 16px;
+  padding: 6px 12px;
   border: none;
-  border-radius: 6px;
+  border-radius: 4px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 13px;
   transition: all 0.2s;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .btn-primary {
@@ -319,6 +327,11 @@ body {
 }
 
 .welcome-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
   text-align: center;
   padding: 60px 40px;
   color: #718096;
@@ -440,10 +453,12 @@ body {
 
 .search-bar {
   display: flex;
-  padding: 10px 20px;
+  align-items: center;
+  padding: 8px 20px;
   background-color: #f7fafc;
   border-bottom: 1px solid #e2e8f0;
-  gap: 10px;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
 .app.dark .search-bar {
@@ -650,4 +665,78 @@ mark {
 
 .file-tree::-webkit-scrollbar-thumb:hover {
   background: #718096;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+  .toolbar {
+    padding: 4px 12px;
+    gap: 4px;
+  }
+  
+  .toolbar-left,
+  .toolbar-right {
+    gap: 4px;
+  }
+  
+  .btn {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+  
+  .welcome-message {
+    padding: 40px 20px;
+  }
+  
+  .welcome-message h2 {
+    font-size: 1.5rem;
+  }
+  
+  .welcome-message p {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 8px;
+    gap: 8px;
+  }
+  
+  .toolbar-left,
+  .toolbar-right {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .btn {
+    min-width: 60px;
+    text-align: center;
+  }
+  
+  .welcome-message {
+    padding: 20px 16px;
+  }
+  
+  .welcome-message h2 {
+    font-size: 1.3rem;
+    margin-bottom: 16px;
+  }
+  
+  .welcome-message p {
+    font-size: 0.85rem;
+    margin-bottom: 24px;
+  }
+  
+  .search-bar {
+    padding: 6px 12px;
+    gap: 6px;
+  }
+  
+  .search-input {
+    font-size: 12px;
+    padding: 6px 8px;
+  }
 }
