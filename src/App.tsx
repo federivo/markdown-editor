@@ -239,7 +239,7 @@ const App: React.FC = () => {
           className="btn btn-secondary"
           onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
         >
-          {theme === 'light' ? '🌙' : '☀️'} {theme === 'light' ? 'Dark' : 'Light'}
+{theme === 'light' ? 'Dark' : 'Light'}
         </button>
       </div>
     </div>

@@ -26,24 +26,17 @@ const FolderExplorer: React.FC<FolderExplorerProps> = ({
   onOpenFolder,
   onFileSelect
 }) => {
-  const formatFileSize = (bytes: number) => {
-    if (bytes === 0) return '0 B'
-    const k = 1024
-    const sizes = ['B', 'KB', 'MB']
-    const i = Math.floor(Math.log(bytes) / Math.log(k))
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i]
-  }
 
 
   return (
     <div className="folder-explorer">
       <div className="folder-controls">
         <button 
-          className="btn btn-primary"
+          className="btn btn-folder"
           onClick={onOpenFolder}
           disabled={isLoadingFolder}
         >
-          {isLoadingFolder ? '⏳ Loading...' : '📁 Open Folder'}
+          {isLoadingFolder ? 'Loading...' : 'Open Folder'}
         </button>
       </div>
 
@@ -74,7 +67,6 @@ const FolderExplorer: React.FC<FolderExplorerProps> = ({
                   )}
                   <div className="file-name">{file.name}</div>
                 </div>
-                <span className="file-size">{formatFileSize(file.size)}</span>
               </div>
             )
           })}
