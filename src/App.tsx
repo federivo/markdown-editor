@@ -26,7 +26,7 @@ const App: React.FC = () => {
   const [currentFile, setCurrentFile] = useState<FileInfo | null>(null)
   const [content, setContent] = useState('')
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false)
-  const [viewMode, setViewMode] = useState<'split' | 'editor' | 'preview'>('split')
+  const [viewMode, setViewMode] = useState<'split' | 'editor' | 'preview'>('preview')
   const [renderedHtml, setRenderedHtml] = useState('')
   const [theme, setTheme] = useState<'light' | 'dark'>('light')
   const [showSearch, setShowSearch] = useState(false)

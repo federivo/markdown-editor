@@ -1,0 +1,33 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="512" height="512" rx="80" fill="#2D3748"/>
+  
+  <!-- Document base -->
+  <rect x="96" y="64" width="320" height="384" rx="12" fill="#FFFFFF"/>
+  
+  <!-- Document shadow -->
+  <rect x="100" y="68" width="320" height="384" rx="12" fill="#F7FAFC"/>
+  
+  <!-- Header section -->
+  <rect x="128" y="96" width="256" height="32" rx="4" fill="#E2E8F0"/>
+  
+  <!-- Markdown content lines -->
+  <rect x="128" y="152" width="200" height="8" rx="4" fill="#4A5568"/>
+  <rect x="128" y="176" width="256" height="8" rx="4" fill="#718096"/>
+  <rect x="128" y="200" width="180" height="8" rx="4" fill="#718096"/>
+  
+  <!-- Code block -->
+  <rect x="128" y="232" width="256" height="64" rx="6" fill="#2D3748"/>
+  <rect x="144" y="248" width="100" height="6" rx="3" fill="#63B3ED"/>
+  <rect x="144" y="264" width="80" height="6" rx="3" fill="#68D391"/>
+  <rect x="144" y="280" width="120" height="6" rx="3" fill="#F6AD55"/>
+  
+  <!-- More content lines -->
+  <rect x="128" y="320" width="240" height="8" rx="4" fill="#718096"/>
+  <rect x="128" y="344" width="200" height="8" rx="4" fill="#718096"/>
+  
+  <!-- Markdown symbol overlay -->
+  <circle cx="384" cy="160" r="48" fill="#3182CE"/>
+  <path d="M356 148L356 172L364 172L364 160L372 172L380 172L380 160L388 172L396 172L396 148L388 148L388 160L380 148L372 148L372 160L364 148L356 148Z" fill="white"/>
+  <path d="M404 160L412 148L412 172L404 160Z" fill="white"/>
+</svg>
