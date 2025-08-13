@@ -38,7 +38,3 @@ jobs:
           # If the commit is tagged with a version (e.g. "v1.0.0"),
           # release the app after building
           release: ${{ startsWith(github.ref, 'refs/tags/v') }}
-
-          # Platform to build for (automatically detected from runner OS)
-          mac_certs: ${{ secrets.MAC_CERTS }}
-          mac_certs_password: ${{ secrets.MAC_CERTS_PASSWORD }}

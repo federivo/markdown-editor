@@ -30,6 +30,7 @@
   "license": "MIT",
   "type": "module",
   "devDependencies": {
+    "@electron/notarize": "^3.0.2",
     "@tailwindcss/postcss": "^4.1.11",
     "@tailwindcss/typography": "^0.5.16",
     "@types/node": "^24.0.14",
@@ -91,8 +92,13 @@
         }
       ],
       "icon": "assets/app-icon.icns",
-      "hardenedRuntime": true,
-      "gatekeeperAssess": false
+      "hardenedRuntime": false,
+      "gatekeeperAssess": false,
+      "identity": null,
+      "type": "development"
+    },
+    "dmg": {
+      "sign": false
     },
     "win": {
       "target": [

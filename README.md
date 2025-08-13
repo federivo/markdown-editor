@@ -22,6 +22,12 @@ A modern, cross-platform Markdown editor with real-time preview, advanced file m
 **Windows**: Download `.exe` → Run → Follow installer  
 **Linux**: Download `.AppImage` → `chmod +x filename` → `./filename`
 
+#### macOS Security Notice
+If you see "Markdown Editor.app is damaged and can't be opened" on macOS:
+1. **Right-click** the app and select "Open" (instead of double-clicking)
+2. Or run in Terminal: `xattr -cr "/Applications/Markdown Editor.app"`
+3. This occurs because the app isn't notarized by Apple (requires paid developer account)
+
 ## Features
 
 ### ✨ Core Features
